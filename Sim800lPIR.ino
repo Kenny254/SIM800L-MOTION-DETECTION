@@ -20,15 +20,6 @@ void setup() {
   pinMode(ledPin, OUTPUT);      // declare LED as output
   pinMode(inputPin, INPUT);     // declare sensor as input
   Serial.begin(9600);
-  
- // SIM800L SECTION
- 
- Sim800l.begin(); // initializate the library. 
-	text="Testing Sms";  //text for the message. 
-	number="2926451386"; //change to a valid number.
-	error=Sim800l.sendSms(number,text);
-	// OR 
-	//Sim800l.sendSms("+540111111111","the text go here")
 
 }
 
@@ -39,7 +30,15 @@ void loop(){
 
   val = digitalRead(inputPin);  // read input value
   if (val == HIGH) {            // check if the input is HIGH
-    digitalWrite(ledPin, HIGH);  // turn LED ON
+    // SIM800L SECTION
+ 
+  Sim800l.begin(); // initializate the library. 
+  text="Hey Boss are you back home ?I sense motion.";  //text for the message. 
+  digitalWrite(ledPin, HIGH);  // turn LED ON
+  number="0721934493"; //phone number.
+  error=Sim800l.sendSms(number,text);  //Sim800l.sendSms("0721934493","the text go here")
+
+ 
     if (pirState == LOW) {
       // we have just turned on
       Serial.println("Motion detected!");
@@ -56,6 +55,5 @@ void loop(){
     }
   }
   
-  //SIM800L SECTION
-  //Do nothing
+ 
 }
