@@ -29,7 +29,9 @@ void setup()
 
 void loop()
 
-{  
+{ 
+      
+  // Checks serial connectivity 
   if(mySerial.available()){
       delay(30);
       
