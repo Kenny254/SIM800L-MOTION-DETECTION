@@ -88,62 +88,6 @@ void loop()
           delay(1000);
           //Serial.println("SMS sent");
           }
-          
-           else if (inputString.indexOf("PLEASE FLASH") > -1){
-          digitalWrite(12, HIGH);
-          delay(100);
-          digitalWrite(12, LOW);
-          delay(100);
-           digitalWrite(13, HIGH);
-          delay(100);
-          digitalWrite(13, LOW);
-          delay(100);
-          digitalWrite(9, HIGH);
-          delay(100);
-          digitalWrite(9, LOW);
-          delay(100);
-          mySerial.write("AT+CMGS=\"your number\"\r\n");
-          delay(100);
-          mySerial.write("Did you realize I did Red,Green,Blue?");
-          delay(100);
-          mySerial.write((char)26);
-          delay(100);
-          //Serial.println("SMS sent");
-          }
-
-          else if (inputString.indexOf("HI BOT") > -1){
-          mySerial.write("AT+CMGS=\"your number\"\r\n");
-          delay(100);
-          mySerial.write("Hi boss,call me Jasper");
-          delay(100);
-          mySerial.write((char)26);
-          delay(100);
-          }
-          
-          else if (inputString.indexOf("AND HOUSE") > -1){
-          mySerial.write("AT+CMGS=\"your number\"\r\n");
-          delay(100);
-          mySerial.write("Well watched.No motion,No fire,No smoke, Temp,Hum:20,43");
-          delay(100);
-          mySerial.write((char)26);
-          delay(100);
-          }
-          else if (inputString.indexOf("JASPER") > -1){
-          mySerial.write("AT+CMGS=\"your number\"\r\n");
-          delay(100);
-          mySerial.write("AI :2018. Under Turing Test. KR-MFA STEAM");
-          delay(100);
-          mySerial.write((char)26);
-          delay(100);
-          }
-          else if (inputString.indexOf("HUJAMBO") > -1){
-          mySerial.write("AT+CMGS=\"your number\"\r\n");
-          delay(100);
-          mySerial.write("Sijambo ,Tafadhali,charge me.");
-          delay(100);
-          mySerial.write((char)26);
-          delay(100);
-          }
                 
         delay(50);
 
