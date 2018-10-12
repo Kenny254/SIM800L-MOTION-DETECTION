@@ -68,8 +68,19 @@ void loop()
          //PIR FEEDBACK AND LISTENER
           
           if (pirState == LOW) {
+                
       // we have just turned on
       Serial.println("Motion detected!");
+       //SEND SMS ON DETECT
+        delay(100);
+        mySerial.write("AT+CMGS=\"your number\"\r\n");
+        delay(100);
+        mySerial.write("Hello Sir, everything seems okay.");
+        mySerial.write((char)26);
+        delay(100);
+       //Serial.println("SMS sent");
+                
+      digitalWrite(ledPin, HIGH);  // turn LED ON
       // We only want to print on the output change, not state
       pirState = HIGH;
     }
