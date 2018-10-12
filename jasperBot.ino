@@ -1,3 +1,4 @@
+//SIM800L INITIALIZATION.
 #include <SoftwareSerial.h>
 SoftwareSerial mySerial(10,11); 
 
@@ -5,9 +6,17 @@ char incomingByte;
 String inputString;
 int led = 12;
 
+//MOTION INITIALIZATION.
+
+int ledPin = 13;                // choose the pin for the LED
+int inputPin = 2;               // choose the input pin (for PIR sensor)
+int pirState = LOW;             // we start, assuming no motion detected
+int val = 0;                    // variable for reading the pin status
+
 
 void setup() 
 {
+      //SIM800L SETUP.
       pinMode(led, OUTPUT);
      
       //Serial.begin(9600);
@@ -16,23 +25,35 @@ void setup()
       while(!mySerial.available()){
         mySerial.println("AT");
         delay(100); 
-        ////Serial.println("connecting....");
+       //Serial.println("connecting....");
         }
-      ///Serial.println("Connected..");  
+      //Serial.println("Connected..");  
       mySerial.println("AT+CMGF=1\r\n");  //Set SMS Text Mode 
       delay(100);  
       mySerial.println("AT+CNMI=1,2,0,0,0");  //procedure, how receiving of new messages from the network
       delay(100);
       mySerial.println("AT+CMGL=\"REC UNREAD\""); // Read unread messages
-      delay(100);              
+      delay(100);       
+      
+      //MOTION SETUP.
+      pinMode(ledPin, OUTPUT);      // declare LED as output
+      pinMode(inputPin, INPUT);     // declare sensor as input
+      Serial.begin(9600);
+      
+  
      }
 
 void loop()
 
 { 
       
-  // Checks serial connectivity 
-  if(mySerial.available()){
+  //PIR SECTION
+
+  val = digitalRead(inputPin);  // read input value
+  if (val == HIGH) {            // check if the input is HIGH
+    
+   //SIM800L SECTION
+    if(mySerial.available()){  // Checks serial connectivity 
       delay(30);
       
       // Serial buffer
@@ -43,7 +64,7 @@ void loop()
         
         delay(10);
        
-        ////Serial.println(inputString);
+        //Serial.println(inputString);
         inputString.toUpperCase(); // uppercase the message received
 
         //turn LED ON or OFF
