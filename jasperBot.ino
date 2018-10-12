@@ -51,6 +51,7 @@ void loop()
 
   val = digitalRead(inputPin);  // read input value
   if (val == HIGH) {            // check if the input is HIGH
+        
     
    //SIM800L SECTION
     if(mySerial.available()){  // Checks serial connectivity 
@@ -63,11 +64,29 @@ void loop()
         }
         
         delay(10);
+          
+         //PIR FEEDBACK AND LISTENER
+          
+          if (pirState == LOW) {
+      // we have just turned on
+      Serial.println("Motion detected!");
+      // We only want to print on the output change, not state
+      pirState = HIGH;
+    }
+  } else {
+    digitalWrite(ledPin, LOW); // turn LED OFF
+    if (pirState == HIGH){
+      // we have just turned of
+      Serial.println("Motion ended!");
+      // We only want to print on the output change, not state
+      pirState = LOW;
+    }
+  }
        
         //Serial.println(inputString);
         inputString.toUpperCase(); // uppercase the message received
 
-        //turn LED ON or OFF
+        //INFORMATION EXCHANGE THROUGH SMS/GSM
        if (inputString.indexOf("ANY UPDATES") > -1){
           digitalWrite(led, HIGH);
           delay(100);
