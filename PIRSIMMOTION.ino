@@ -60,8 +60,8 @@ void loop(){
        Sim800l.begin(); // initializate the library. 
        text="Hey Boss are you back home ?I sense motion.";  //text for the message. 
         digitalWrite(ledPin, HIGH);  // turn LED ON
-        number="0721934493"; //phone number.
-        error=Sim800l.sendSms(number,text);  //Sim800l.sendSms("0721934493","the text go here")
+        number="0721000000"; //phone number.
+        error=Sim800l.sendSms(number,text);  //Sim800l.sendSms("0721000000","the text go here")
         // We only want to print on the output change, not state
       pirState = HIGH;
     }
